@@ -1,0 +1,6 @@
+.progress {
+  background-color: transparent;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  transform: rotate(-180deg);
+}
