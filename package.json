@@ -4,6 +4,7 @@
   "description": "A remix of the ToTheBestOf service",
   "main": "index.js",
   "scripts": {
+    "local": "PORT=8080 node index.js",
     "test": "mocha"
   },
   "repository": {
@@ -24,6 +25,7 @@
   "dependencies": {
     "good": "^7.1.0",
     "hapi": "^16.1.1",
+    "inert": "^4.2.0",
     "node-env-file": "^0.1.8"
   }
 }
