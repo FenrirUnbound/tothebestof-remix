@@ -13,7 +13,7 @@
   <!-- fun -->
   <link rel="stylesheet" href="styles/main.css">
   <script src="scripts/main.js"></script>
-<body ng-controller="AppController">
+<body ng-controller="AppController" ng-cloak>
   <h1 class="text-center">Of The Best Of - Vol. 2</h1>
 
   <div class="col-xs-8 col-xs-offset-2">
@@ -31,12 +31,12 @@
       <p ng-bind-html="artist.bio"></p>
     </div>
     <div class="col-md-6">
-      <img class="img-responsive" ng-src="{{artist.image}}">
+      <img class="img-responsive img-rounded" ng-src="{{artist.image}}">
     </div>
   </div>
 
-  <div class="col-md-10 col-md-offset-1">
-    <table class="table table-striped">
+  <div class="col-md-10 col-md-offset-1" ng-show="topTracks.length">
+    <table class="table table-striped table-hover">
       <tr>
         <th>Song Title</th>
         <th>Popularity</th>
