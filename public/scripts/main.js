@@ -32,9 +32,12 @@ app.controller('AppController', ['$scope', '$http', '$compile', function ($scope
 
     if (!artistName) { return; }
 
+    const fetchArtistInfo = getArtist($http, artistName);
+    const fetchTopTracks = getTopTracks($http, artistName);
+
     return Promise.all([
-      getArtist($http, artistName),
-      getTopTracks($http, artistName)
+      fetchArtistInfo,
+      fetchTopTracks
     ]).then(([ artistInfo, topTracks ]) => {
       $scope.artist = artistInfo;
 
