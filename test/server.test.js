@@ -70,4 +70,21 @@ describe('server test', () => {
       expect(payload.data.name).to.equal('Rick Astley');
     });
   });
+
+  it('returns the track info', () => {
+    return server.inject({
+      method: 'GET',
+      url: '/api/artists/rick%20astley/videos/angels%20on%20my%20side'
+    }).then((response) => {
+      expect(response.statusCode).to.equal(200);
+
+      const payload = JSON.parse(response.payload);
+
+      expect(payload.data).to.be.an('object');
+      expect(payload.data).to.have.property('id');
+
+      expect(payload.data.id).to.be.an('object')
+        .that.has.property('videoId').to.equal('cc91EfoBh8A');
+    });
+  });
 });
