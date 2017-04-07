@@ -21,11 +21,13 @@ function getTopTracks($http, artist) {
 }
 
 function createVid($scope, videoIds) {
-  const first = videoIds.shift();
+  // sigh. this is expensive AF
+  $('#videoPort').replaceWith('<div id="videoPort"></div>');
 
+  const first = videoIds.shift();
   const player = new YT.Player('videoPort', {
-    height: '270',
-    width: '480',
+    height: '349',
+    width: '560',
     playerVars: {
       playlist: videoIds.join(',')
     },
@@ -68,27 +70,28 @@ app.controller('AppController', ['$scope', '$http', function ($scope, $http) {
     const fetchArtistInfo = getArtist($http, artistName);
     const fetchTopTracks = getTopTracks($http, artistName);
 
-    const renderVideo = fetchTopTracks
-      .then(topTracks => getVideos($http, artistName, topTracks))
-      .then(videoIds => createVid($scope, videoIds));
+    const fetchVideoIds = fetchTopTracks
+      .then(topTracks => getVideos($http, artistName, topTracks));
 
     return Promise.all([
       fetchArtistInfo,
-      fetchTopTracks
-    ]).then(([ artistInfo, topTracks ]) => {
+      fetchTopTracks,
+      fetchVideoIds,
+    ]).then(([ artistInfo, topTracks, videoIds ]) => {
       $scope.artist = artistInfo;
 
       const maxPopularity = topTracks[0].listeners;
-      $scope.topTracks = topTracks.map((track) => {
+      $scope.topTracks = topTracks.map((track, index) => {
         return {
           name: track.name,
-          popularity: track.listeners / maxPopularity * 100
+          popularity: track.listeners / maxPopularity * 100,
+          videoId: videoIds[index]
         };
       });
 
       $scope.$apply();
 
-      return renderVideo;
+      return createVid($scope, videoIds);
     });
   };
 }]);
