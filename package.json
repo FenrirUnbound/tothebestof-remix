@@ -4,8 +4,13 @@
   "description": "A remix of the ToTheBestOf service",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "local": "PORT=8080 node index.js",
-    "test": "mocha"
+    "test": "mocha",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "build": "ui/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,9 +25,15 @@
   "private": true,
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "npm-watch": "^0.1.8",
+    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony",
+    "webpack": "^2.4.1"
   },
   "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angular-sanitize": "^1.6.4",
     "good": "^7.1.0",
     "hapi": "^16.1.1",
     "inert": "^4.2.0",
