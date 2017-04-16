@@ -16,7 +16,7 @@ function getTopTracks($http, artist) {
   }).then(response => Promise.resolve(response.data.data.slice(0, MAX_TRACKS)));
 }
 
-function createVid($scope, videoIds) {
+function createVid($scope, artistName, videoIds) {
   // sigh. this is expensive AF
   $('#videoPort').replaceWith('<div id="videoPort"></div>');
 
@@ -77,7 +77,22 @@ function ArtistTracksController ($scope, $http, $routeParams) {
       };
     });
 
-    return createVid($scope, videoIds);
+
+    const title = `To The Best Of - ${artistName}`;
+    const playlist = videoIds.join(',');
+    $scope.ytPlaylist = `https://www.youtube.com/watch_videos?video_ids=${playlist}&title=${title}`;
+
+    //spotify stuff
+    localStorage.setItem('artistName', encodeURIComponent(artistName));
+    localStorage.setItem('tracks', topTracks.map(track => encodeURIComponent(track.name)).join(','));
+
+    const clientId = encodeURIComponent('4bc5535d9ef24a01ab7879eaa2ad78e0');
+    const scope = encodeURIComponent('playlist-modify-private');
+    const redirectUri = encodeURIComponent('http://localhost:8080/spotify');
+    $scope.spotPlaylist = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
+    console.log($scope.spotPlaylist);
+
+    return createVid($scope, artistName, videoIds);
   }).then(() => {
     $scope.loading = false;
 

@@ -6,6 +6,7 @@ const ngRoute = require('angular-route');
 
 const artistTracksController = require('./artistTracks');
 const searchController = require('./search');
+const spotifyController = require('./spotify');
 
 const MAX_TRACKS = 10;
 
@@ -18,7 +19,7 @@ app.config([
   '$locationProvider',
   '$routeProvider',
   function ($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
+    $locationProvider.html5Mode(true);
 
     $routeProvider
       .when('/', {
@@ -28,9 +29,15 @@ app.config([
         controller: 'ArtistController',
         templateUrl: 'artist.html'
       })
-      .otherwise('/')
+      .when('/spotify', {
+        controller: 'SpotifyController',
+        templateUrl: 'spotify.html'
+      })
+      .otherwise('/spotify');
+      // .otherwise('/')
   }
 ]);
 
 app.controller('SearchController', searchController);
 app.controller('ArtistController', artistTracksController);
+app.controller('SpotifyController', spotifyController);

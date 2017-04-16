@@ -13,8 +13,9 @@
     <!-- youtube dependency -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <!-- fun -->
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="scripts/app.js"></script>
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="/scripts/app.js"></script>
+    <base href="/">
   </head>
 <body ng-cloak>
   <h1 class="text-center">Of The Best Of - Vol. 2</h1>
@@ -57,10 +58,16 @@
         </div>
       </div>
 
-      <!-- <div class="row col-xs-12 text-center">
-        <div class="social-frame">
-          <span class="social"><img src="images/YouTube-logo-full_color.png"></span>
-          <span class="social"><img src="images/Spotify_Logo_RGB_Green.png"></span>
+      <!-- <div class="row col-xs-12 col-md-2 col-lg-1">
+        <div class="col-sm-2 col-sm-offset-4 col-md-12 col-md-offset-0">
+          <a ng-href="{{ytPlaylist}}" target="_blank">
+            <img class="img-responsive social" src="/images/YouTube-social-icon_red_128px.png">
+          </a>
+        </div>
+        <div class="col-sm-2 col-md-12">
+          <a ng-href="{{spotPlaylist}}" target="_blank">
+            <img class="img-responsive social" src="/images/Spotify_Icon_RGB_Green.png">
+          </a>
         </div>
       </div> -->
 
@@ -76,7 +83,7 @@
               {{track.name}}
               </div>
               <div class="col-xs-3 col-sm-2">
-                <a href="https://www.youtube.com/watch?v={{track.videoId}}"><img class="img-responsive share-icon" src="images/YouTube-social-icon_red_128px.png"></a>
+                <a href="https://www.youtube.com/watch?v={{track.videoId}}"><img class="img-responsive share-icon" src="/images/YouTube-social-icon_red_128px.png"></a>
               </div>
             </td>
             <td class="col-xs-3">
@@ -86,6 +93,23 @@
             </td>
           </tr>
         </table>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="spotify.html">
+    <div>
+      <div class="progress forward row col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{progress}}%;">
+          {{progress}}%
+        </div>
+      </div>
+      <div class="row col-xs-12">
+        <ul>
+          <li ng-repeat="update in updates">
+            {{update}}
+          </li>
+        </ul>
       </div>
     </div>
   </script>
