@@ -71,6 +71,21 @@ describe('server test', () => {
     });
   });
 
+  it('searches for an artist', () => {
+    return server.inject({
+      method: 'GET',
+      url: '/api/artists?q=leessang'
+    }).then((response) => {
+      expect(response.statusCode).to.equal(200);
+
+      const payload = JSON.parse(response.payload);
+
+      expect(payload).to.have.property('data')
+        .that.is.an('array');
+      expect(payload.data.length).to.be.at.least(2);
+    });
+  });
+
   it('returns the track info', () => {
     return server.inject({
       method: 'GET',
