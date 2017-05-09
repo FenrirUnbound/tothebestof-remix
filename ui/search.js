@@ -17,7 +17,9 @@ function initialCriteria(path) {
 function SearchController($scope, $sanitize, $location) {
   $scope.searchText = initialCriteria($location.path());
 
-  $scope.search = () => {
+  $scope.search = (e) => {
+    e.preventDefault();
+
     const artistName = $sanitize($scope.searchText);
 
     if (!artistName) { return; }
