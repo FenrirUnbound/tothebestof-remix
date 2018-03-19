@@ -80,7 +80,9 @@ function ArtistTracksController ($scope, $http, $routeParams) {
 
     const title = `To The Best Of - ${artistName}`;
     const playlist = videoIds.join(',');
-    $scope.ytPlaylist = `https://www.youtube.com/watch_videos?video_ids=${playlist}&title=${title}`;
+    const ytPlaylist = `https://www.youtube.com/watch_videos?video_ids=${playlist}&title=${title}`;
+    $scope.ytPlaylist = ytPlaylist;
+    console.log(ytPlaylist);
 
     //spotify stuff
     localStorage.setItem('artistName', encodeURIComponent(artistName));
