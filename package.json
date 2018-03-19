@@ -28,6 +28,7 @@
     "mocha": "^3.2.0",
     "npm-watch": "^0.1.8",
     "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^2.4.1"
   },
   "dependencies": {

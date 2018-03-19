@@ -10,6 +10,6 @@ module.exports = {
     path: path.resolve(__dirname, 'public/scripts')
   },
   plugins: [
-    new UglifyJSPlugin({ minimize: true })
+    new UglifyJSPlugin()
   ]
 };
