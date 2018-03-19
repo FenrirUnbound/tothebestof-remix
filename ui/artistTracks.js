@@ -78,7 +78,7 @@ function ArtistTracksController ($scope, $http, $routeParams) {
     });
 
 
-    const title = `To The Best Of - ${artistName}`;
+    const title = encodeURIComponent(`To The Best Of - ${artistName}`);
     const playlist = videoIds.join(',');
     const ytPlaylist = `https://www.youtube.com/watch_videos?video_ids=${playlist}&title=${title}`;
     $scope.ytPlaylist = ytPlaylist;
