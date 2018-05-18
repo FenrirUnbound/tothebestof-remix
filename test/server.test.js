@@ -37,9 +37,11 @@ describe('server test', () => {
   });
 
   it('returns the top tracks of an artist', () => {
+    const artistName = 'Rick Astley';
+
     return server.inject({
       method: 'GET',
-      url: '/api/artists/rick%20astley/tracks'
+      url: `/api/artists/${encodeURIComponent(artistName)}/tracks`
     }).then((response) => {
       expect(response.statusCode).to.equal(200);
 
@@ -53,6 +55,22 @@ describe('server test', () => {
       expect(targetTrack.name).to.equal('Never Gonna Give You Up');
       expect(targetTrack.playCount).to.be.above(2165960);
       expect(targetTrack.listeners).to.be.above(435225);
+    });
+  });
+
+  it('returns the top tracks of a non-English artist', () => {
+    const artistName = '五月天';
+
+    return server.inject({
+      method: 'GET',
+      url: `/api/artists/${encodeURIComponent(artistName)}/tracks`
+    }).then((response) => {
+      expect(response.statusCode).to.equal(200);
+
+      const payload = JSON.parse(response.payload);
+
+      expect(payload.data).to.be.an('array')
+        .of.length(50);
     });
   });
 
@@ -83,6 +101,23 @@ describe('server test', () => {
       expect(payload).to.have.property('data')
         .that.is.an('array');
       expect(payload.data.length).to.be.at.least(2);
+    });
+  });
+
+  it('searches for a URI encoded artist', () => {
+    const artistName = '五月天';
+
+    return server.inject({
+      method: 'GET',
+      url: `/api/artists?q=${encodeURIComponent(artistName)}`
+    }).then((response) => {
+      expect(response.statusCode).to.equal(200);
+
+      const payload = JSON.parse(response.payload);
+
+      expect(payload).to.have.property('data')
+        .that.is.an('array');
+      expect(payload.data[0]).to.equal(artistName);
     });
   });
 
