@@ -24,7 +24,7 @@ function SearchController($scope, $sanitize, $location) {
 
     if (!artistName) { return; }
 
-    $location.path(`/artists/${encodeURIComponent(artistName)}`);
+    $location.path(`/artists/${artistName}`);
   };
 }
 
