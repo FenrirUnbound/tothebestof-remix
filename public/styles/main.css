@@ -9,6 +9,10 @@
   transform: rotate(0deg);
 }
 
+.imageLink {
+  display: inline-block;
+}
+
 .row {
   margin-bottom: 1em;
 }
@@ -19,6 +23,10 @@
 
 .social {
   max-height: 100px;
+}
+
+.vendorPlaylist {
+  text-decoration: overline underline;
 }
 
 .videoWrapper {
